@@ -41,6 +41,7 @@ const SectionDivider = ({ title, textColor = "#C8102E" }) => (
 
 export default function Home() {
   const [isUnternehmenOpen, setIsUnternehmenOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const scrollToTop = () => {
     if (typeof window !== "undefined") {
@@ -73,6 +74,28 @@ export default function Home() {
         
         .nav-link { color: #D1D1D1; text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.25s ease; cursor: pointer; }
         .nav-link:hover { color: #FFF; }
+        
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { width: 24px; height: 2px; background: #D1D1D1; transition: all 0.3s ease; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        
+        .mobile-menu { display: none; position: absolute; top: 60px; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(15px); flex-direction: column; width: 100%; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); z-index: 999; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { color: #D1D1D1; text-decoration: none; padding: 12px 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+        .mobile-menu a:hover { color: #FFF; }
+        
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { width: 24px; height: 2px; background: #D1D1D1; transition: all 0.3s ease; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        
+        .mobile-menu { display: none; position: absolute; top: 60px; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(15px); flex-direction: column; width: 100%; padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { color: #D1D1D1; text-decoration: none; padding: 12px 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+        .mobile-menu a:hover { color: #FFF; }
         
         /* Leistungs-Karten (etwas heller) */
         .card-dark { background: #262626; border: 1px solid #333; transition: all 0.4s ease; height: 100%; max-height: 280px; position: relative; overflow: hidden; }
@@ -117,10 +140,10 @@ export default function Home() {
         }
 
         @media (max-width: 480px) {
-          header { padding: 10px 15px !important; }
+          header { padding: 10px 15px !important; position: relative; }
           header img { height: 30px !important; }
-          nav { gap: 10px !important; flex-wrap: wrap; }
-          .nav-link { font-size: 8px; }
+          nav { display: none; }
+          .hamburger { display: flex; }
           
           section { padding: 0 15px 40px !important; }
           
@@ -161,6 +184,33 @@ export default function Home() {
              <Link href="/karriere" className="nav-link">Karriere</Link>
              <Link href="/kontakt" className="nav-link">Kontakt</Link>
           </nav>
+          
+          <div 
+            className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div 
+                className="mobile-menu active"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+              >
+                <Link href="/unternehmen" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Unternehmen</Link>
+                <a href="#leistungen" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Leistungen</a>
+                <Link href="/projekte" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Projekte</Link>
+                <Link href="/team" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Team</Link>
+                <Link href="/karriere" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Karriere</Link>
+                <Link href="/kontakt" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Kontakt</Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </header>
 
         {/* HERO */}
