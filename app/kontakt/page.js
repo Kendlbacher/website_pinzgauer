@@ -111,6 +111,50 @@ export default function KontaktPage() {
           .kontakt-grid { grid-template-columns: 1fr !important; gap: 60px !important; }
           .page-padding { padding: 40px !important; }
         }
+
+        @media (max-width: 768px) {
+          header { padding: 12px 20px !important; }
+          nav { gap: 15px !important; }
+          .nav-link { font-size: 9px; }
+          
+          .page-padding { padding: 30px 20px !important; }
+          .kontakt-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
+          
+          h1 { font-size: 36px !important; }
+          h2 { font-size: 24px !important; }
+          h3 { font-size: 18px !important; }
+          p { font-size: 13px !important; }
+          label { font-size: 12px !important; }
+          
+          .form-card { padding: 30px !important; }
+          .form-input { padding: 12px 8px !important; }
+          
+          footer { padding: 60px 20px 40px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+        }
+
+        @media (max-width: 480px) {
+          header { padding: 10px 15px !important; }
+          header img { height: 30px !important; }
+          nav { gap: 10px !important; flex-wrap: wrap; }
+          .nav-link { font-size: 8px; }
+          
+          .page-padding { padding: 20px 15px !important; }
+          .kontakt-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+          
+          h1 { font-size: 28px !important; }
+          h2 { font-size: 20px !important; }
+          h3 { font-size: 14px !important; }
+          p { font-size: 11px !important; }
+          label { font-size: 10px !important; }
+          
+          .form-card { padding: 20px !important; }
+          .form-input { padding: 10px 6px !important; font-size: 12px !important; }
+          .submit-btn { padding: 10px 16px !important; font-size: 10px !important; }
+          
+          footer { padding: 40px 15px 30px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 20px !important; margin-bottom: 30px !important; }
+        }
       `}</style>
 
       <div style={{ minHeight: "100vh" }}>

@@ -63,6 +63,52 @@ export default function Unternehmen() {
         /* Stat-Karten Design wie Projekte-Stil */
         .stat-card { background: #262626; border: 1px solid #333; padding: 40px; transition: all 0.3s ease; border-radius: 8px; }
         .stat-card:hover { border-color: #C8102E; transform: translateY(-5px); }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 1024px) {
+          header { padding: 15px 40px !important; }
+          nav { gap: 20px !important; }
+          section { padding: 0 40px 60px !important; }
+        }
+
+        @media (max-width: 768px) {
+          header { padding: 12px 20px !important; }
+          nav { gap: 15px !important; }
+          .nav-link { font-size: 9px; }
+          
+          section { padding: 0 20px 60px !important; }
+          div[style*="grid"] { grid-template-columns: 1fr !important; gap: 20px !important; }
+          
+          h1 { font-size: 36px !important; }
+          h2 { font-size: 24px !important; }
+          h3 { font-size: 18px !important; }
+          p { font-size: 13px !important; }
+          
+          .stat-card { padding: 25px !important; }
+          
+          footer { padding: 60px 20px 40px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+        }
+
+        @media (max-width: 480px) {
+          header { padding: 10px 15px !important; }
+          header img { height: 30px !important; }
+          nav { gap: 10px !important; flex-wrap: wrap; }
+          .nav-link { font-size: 8px; }
+          
+          section { padding: 0 15px 40px !important; }
+          div[style*="grid"] { grid-template-columns: 1fr !important; gap: 15px !important; }
+          
+          h1 { font-size: 28px !important; }
+          h2 { font-size: 20px !important; }
+          h3 { font-size: 14px !important; }
+          p { font-size: 11px !important; }
+          
+          .stat-card { padding: 20px !important; }
+          
+          footer { padding: 40px 15px 30px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 20px !important; margin-bottom: 30px !important; }
+        }
       `}</style>
 
       <div style={{ minHeight: "100vh" }}>

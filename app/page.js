@@ -88,6 +88,57 @@ export default function Home() {
 
         .footer-link { color: #D1D1D1; text-decoration: none; font-size: 13px; transition: color 0.2s; }
         .footer-link:hover { color: #FFF; }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 1024px) {
+          header { padding: 15px 40px !important; }
+          .nav-link { font-size: 10px; gap: 20px; }
+          section { padding: 0 40px 80px !important; }
+          .card-dark { margin-bottom: 20px; }
+        }
+
+        @media (max-width: 768px) {
+          header { padding: 12px 20px !important; }
+          nav { gap: 15px !important; }
+          .nav-link { font-size: 9px; letter-spacing: 1px; }
+          
+          section { padding: 0 20px 60px !important; }
+          
+          div[style*="grid"][style*="3"] { grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; }
+          div[style*="grid"][style*="auto-fit"] { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; gap: 15px !important; }
+          
+          .card-dark, .card-project { max-height: none !important; }
+          h1 { font-size: 36px !important; }
+          h3 { font-size: 20px !important; }
+          p { font-size: 14px !important; }
+          
+          footer { padding: 60px 20px 40px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+        }
+
+        @media (max-width: 480px) {
+          header { padding: 10px 15px !important; }
+          header img { height: 30px !important; }
+          nav { gap: 10px !important; flex-wrap: wrap; }
+          .nav-link { font-size: 8px; }
+          
+          section { padding: 0 15px 40px !important; }
+          
+          div[style*="grid"][style*="3"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+          div[style*="grid"][style*="auto-fit"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+          
+          h1 { font-size: 28px !important; }
+          h3 { font-size: 16px !important; }
+          h4 { font-size: 14px !important; }
+          p { font-size: 12px !important; }
+          
+          .card-dark { padding: 30px 20px !important; min-height: 200px !important; }
+          .card-project { border-radius: 6px !important; }
+          
+          footer { padding: 40px 15px 30px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 20px !important; margin-bottom: 30px !important; }
+          footer > div > div { width: 100% !important; }
+        }
       `}</style>
 
       <div style={{ minHeight: "100vh" }}>

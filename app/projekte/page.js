@@ -78,6 +78,42 @@ export default function ProjektePage() {
           .sidebar { width: 100% !important; position: relative !important; top: 0 !important; margin-bottom: 40px !important; }
           .filter-btn { display: inline-block !important; width: auto !important; margin-right: 15px !important; }
         }
+
+        @media (max-width: 768px) {
+          header { padding: 12px 20px !important; }
+          nav { gap: 15px !important; }
+          .nav-link { font-size: 9px; }
+          
+          .content-wrapper { padding: 40px 20px !important; }
+          div[style*="grid"] { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; gap: 15px !important; }
+          
+          h1 { font-size: 36px !important; }
+          h3 { font-size: 20px !important; }
+          p { font-size: 13px !important; }
+          
+          footer { padding: 60px 20px 40px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+        }
+
+        @media (max-width: 480px) {
+          header { padding: 10px 15px !important; }
+          header img { height: 30px !important; }
+          nav { gap: 10px !important; flex-wrap: wrap; }
+          .nav-link { font-size: 8px; }
+          
+          .content-wrapper { padding: 20px 15px !important; }
+          .sidebar { width: 100% !important; margin-bottom: 20px !important; }
+          div[style*="grid"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+          
+          h1 { font-size: 28px !important; }
+          h3 { font-size: 16px !important; }
+          p { font-size: 11px !important; }
+          
+          .filter-btn { font-size: 11px !important; }
+          
+          footer { padding: 40px 15px 30px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 20px !important; margin-bottom: 30px !important; }
+        }
       `}</style>
 
       <div style={{ minHeight: "100vh" }}>
