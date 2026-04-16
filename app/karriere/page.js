@@ -42,6 +42,7 @@ const SectionDivider = ({ title, textColor = "#C8102E" }) => (
 
 export default function KarrierePage() {
   const [openJob, setOpenJob] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleJob = (id) => {
     setOpenJob(openJob === id ? null : id);
@@ -137,6 +138,17 @@ export default function KarrierePage() {
         .nav-link { color: #D1D1D1; text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.25s ease; cursor: pointer; }
         .nav-link:hover { color: #FFF; }
         
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; align-items: flex-end; margin-right: 15px; }
+        .hamburger span { width: 24px; height: 2px; background: #D1D1D1; transition: all 0.3s ease; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        
+        .mobile-menu { display: none !important; position: absolute; top: 60px; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(15px); flex-direction: column; width: calc(100% - 40px); padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); z-index: 999; box-sizing: border-box; }
+        .mobile-menu.active { display: flex !important; }
+        .mobile-menu a { color: #D1D1D1; text-decoration: none; padding: 12px 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+        .mobile-menu a:hover { color: #FFF; }
+        
         .job-card { background: #262626; border: 1px solid #333; margin-bottom: 15px; border-radius: 4px; overflow: hidden; transition: all 0.3s ease; cursor: pointer; }
         .job-card:hover { border-color: #C8102E; transform: translateY(-2px); }
 
@@ -145,6 +157,13 @@ export default function KarrierePage() {
 
         .footer-link { color: #D1D1D1; text-decoration: none; font-size: 13px; transition: color 0.2s; }
         .footer-link:hover { color: #FFF; }
+        
+        @media screen and (max-width: 480px) {
+          header { padding: 10px 15px !important; position: relative; }
+          header img { height: 30px !important; }
+          nav { display: none !important; }
+          .hamburger { display: flex !important; }
+        }
       `}</style>
 
       <div style={{ minHeight: "100vh" }}>
@@ -167,6 +186,42 @@ export default function KarrierePage() {
              <Link href="/karriere" className="nav-link" style={{ color: "#FFF" }}>Karriere</Link>
              <Link href="/kontakt" className="nav-link">Kontakt</Link>
           </nav>
+          
+          <div 
+            className={`hamburger ${isMobileMenuOpen ? 'active' : ''}`}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D1D1D1" strokeWidth="2" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            ) : (
+              <>
+                <span></span>
+                <span></span>
+                <span></span>
+              </>
+            )}
+          </div>
+          
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div 
+                className="mobile-menu active"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+              >
+                <Link href="/unternehmen" onClick={() => setIsMobileMenuOpen(false)}>Unternehmen</Link>
+                <Link href="/#leistungen" onClick={() => setIsMobileMenuOpen(false)}>Leistungen</Link>
+                <Link href="/projekte" onClick={() => setIsMobileMenuOpen(false)}>Projekte</Link>
+                <Link href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</Link>
+                <Link href="/karriere" onClick={() => setIsMobileMenuOpen(false)}>Karriere</Link>
+                <Link href="/kontakt" onClick={() => setIsMobileMenuOpen(false)}>Kontakt</Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </header>
 
         {/* HERO */}
