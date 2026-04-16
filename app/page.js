@@ -49,18 +49,18 @@ export default function Home() {
   };
 
   const leistungen = [
-    { n: "01", t: "Stahlbau", d: "Leichter bis mittelschwerer Stahlbau, Rohrbruecken und Liftstationen auf hoechstem Niveau." },
-    { n: "02", t: "Schlosserei", d: "Individuelle Schlosserarbeiten fuer private und gewerbliche Auftraggeber." },
-    { n: "03", t: "Reparaturen", d: "Professionelle Maschinenbau-Instandsetzung und schneller Verschleiss-Service." },
-    { n: "04", t: "Plasma-Cut", d: "Praezisions-Plasmaarbeiten und kreative Metall-Geschenkideen nach Mass." },
-    { n: "05", t: "Schweissen", d: "Zertifizierte Reparaturschweissungen und komplexe Konstruktionsmontage." },
-    { n: "06", t: "Genauere Infos", d: "Erfahren Sie mehr ueber unsere speziellen Fertigungsmethoden.", isLast: true }
+    { n: "01", t: "Stahlbau", d: "Leichter bis mittelschwerer Stahlbau, Rohrbücken und Liftstationen auf höchstem Niveau." },
+    { n: "02", t: "Schlosserei", d: "Individuelle Schlosserarbeiten für private und gewerbliche Auftraggeber." },
+    { n: "03", t: "Reparaturen", d: "Professionelle Maschinenbau-Instandsetzung und schneller Verschleiß-Service." },
+    { n: "04", t: "Plasma-Cut", d: "Präzisions-Plasmaarbeiten und kreative Metall-Geschenkideen nach Maß." },
+    { n: "05", t: "Schweißen", d: "Zertifizierte Reparaturschweißungen und komplexe Konstruktionsmontage." },
+    { n: "06", t: "Genauere Infos", d: "Erfahren Sie mehr über unsere speziellen Fertigungsmethoden.", isLast: true }
   ];
 
   const projekte = [
-    { id: 1, name: "Skistation Schmittenhoehe", kategorie: "Stahlbau", jahr: "2026", bild: "/projekte/projekt1.jpg", text: "Konstruktion und Montage einer spezialgefertigten Liftstation." },
-    { id: 2, name: "Salzburger Handwerkspreis", kategorie: "Auszeichnung", jahr: "2025", bild: "/projekte/info2.jpg", text: "Leichter bis mittelschwerer Stahlbau fuer eine moderne Produktionsstaette." },
-    { id: 3, name: "Privatvilla Schlosserarbeiten", kategorie: "Schlosserei", jahr: "2025", bild: "/projekte/projekt3.jpg", text: "Individuelle Gelaender- und Treppenkonstruktionen aus Edelstahl." }
+    { id: 1, name: "Skistation Schmittenhöhe", kategorie: "Stahlbau", jahr: "2026", bild: "/projekte/projekt1.jpg", text: "Konstruktion und Montage einer spezialgefertigten Liftstation." },
+    { id: 2, name: "Salzburger Handwerkspreis", kategorie: "Auszeichnung", jahr: "2025", bild: "/projekte/info2.jpg", text: "Leichter bis mittelschwerer Stahlbau für eine moderne Produktionsstätte." },
+    { id: 3, name: "Privatvilla Schlosserarbeiten", kategorie: "Schlosserei", jahr: "2025", bild: "/projekte/projekt3.jpg", text: "Individuelle Geländer- und Treppenkonstruktionen aus Edelstahl." }
   ];
 
   return (
@@ -75,13 +75,13 @@ export default function Home() {
         .nav-link:hover { color: #FFF; }
         
         /* Leistungs-Karten (etwas heller) */
-        .card-dark { background: #262626; border: 1px solid #333; transition: all 0.4s ease; height: 100%; position: relative; overflow: hidden; }
+        .card-dark { background: #262626; border: 1px solid #333; transition: all 0.4s ease; height: 100%; max-height: 280px; position: relative; overflow: hidden; }
         .card-dark:hover { transform: translateY(-8px); border-color: #C8102E; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         .card-dark:hover .card-num-bg { opacity: 0.12 !important; }
 
         /* Projekt-Karten */
-        .card-project { background: #FFFFFF; border: 1px solid #EEE; transition: all 0.4s ease; height: 100%; }
-        .card-project:hover { transform: translateY(-8px); border-color: #C8102E; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .card-project { background: #262626; border: 1px solid #333; transition: all 0.4s ease; height: 100%; borderRadius: "8px"; }
+        .card-project:hover { transform: translateY(-8px); border-color: #C8102E; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
         
         .card-btn { margin-top: 25px; padding: 12px 24px; border: 1px solid #C8102E; background: #C8102E; color: #FFF; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; width: fit-content; }
         .card-btn:hover { background: transparent; color: #C8102E; }
@@ -107,6 +107,7 @@ export default function Home() {
              <a href="#leistungen" className="nav-link">Leistungen</a>
              <Link href="/projekte" className="nav-link">Projekte</Link>
              <Link href="/team" className="nav-link">Team</Link>
+             <Link href="/karriere" className="nav-link">Karriere</Link>
              <Link href="/kontakt" className="nav-link">Kontakt</Link>
           </nav>
         </header>
@@ -134,7 +135,7 @@ export default function Home() {
                   {...fadeInUp}
                   transition={{ delay: i * 0.1, duration: 0.8 }}
                   className="card-dark" 
-                  style={{ padding: "60px 40px", borderRadius: "2px", display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: "340px" }}
+                  style={{ padding: "60px 40px", borderRadius: "8px", display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: "280px" }}
                 >
                   <span className="card-num-bg" style={{ position: "absolute", top: "10px", right: "20px", fontFamily: "'Bebas Neue', sans-serif", fontSize: "100px", color: "#FFF", opacity: 0.07, transition: "opacity 0.3s ease" }}>{item.n}</span>
                   <div style={{ width: "30px", height: "2px", background: "#C8102E", marginBottom: "25px" }} />
@@ -153,12 +154,12 @@ export default function Home() {
           <section style={{ padding: "0 80px 140px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: "30px" }}>
               {projekte.map((proj, i) => (
-                <motion.div key={proj.id} {...fadeInUp} transition={{ delay: i * 0.2, duration: 0.8 }} className="card-project" style={{ overflow: "hidden" }}>
+                <motion.div key={proj.id} {...fadeInUp} transition={{ delay: i * 0.2, duration: 0.8 }} className="card-project" style={{ overflow: "hidden", borderRadius: "8px" }}>
                   <div style={{ height: "300px", backgroundImage: `url('${proj.bild}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
                   <div style={{ padding: "40px" }}>
                     <p style={{ color: "#C8102E", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px", fontWeight: "600" }}>{proj.kategorie}</p>
-                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "24px", marginBottom: "12px", color: "#111" }}>{proj.name}</h3>
-                    <p style={{ color: "#555", fontSize: "14px", lineHeight: "1.8" }}>{proj.text}</p>
+                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "24px", marginBottom: "12px", color: "#FFFFFF" }}>{proj.name}</h3>
+                    <p style={{ color: "#BBBBBB", fontSize: "14px", lineHeight: "1.8" }}>{proj.text}</p>
                   </div>
                 </motion.div>
               ))}
@@ -172,7 +173,7 @@ export default function Home() {
           <section style={{ padding: "0 80px 160px" }}>
             <motion.div {...fadeInUp} style={{ maxWidth: "1050px", margin: "0 auto" }}>
                <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, background: "#000", borderRadius: "2px", overflow: "hidden", boxShadow: "0 30px 60px rgba(0,0,0,0.12)" }}>
-                  <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameBorder="0" allowFullScreen />
+                  <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} src="https://www.youtube.com/embed/jItsMRP8Dqk" frameBorder="0" allowFullScreen />
                </div>
             </motion.div>
           </section>
@@ -185,7 +186,7 @@ export default function Home() {
               <img src="/logo.png" alt="Logo" style={{ height: "45px", marginBottom: "30px" }} />
               <p style={{ color: "#CCCCCC", fontSize: "14px", lineHeight: "2.2" }}>
                 <strong>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
-                Gewerbestrasse 9, A-5671 Bruck<br />
+                Gewerbstraße 9, A-5671 Bruck<br />
                 info@psmb.at
               </p>
             </motion.div>
@@ -193,6 +194,7 @@ export default function Home() {
               <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Navigation</p>
               <Link href="/unternehmen" className="footer-link">Unternehmen</Link>
               <Link href="/projekte" className="footer-link">Projekte</Link>
+              <Link href="/karriere" className="footer-link">Karriere</Link>
               <Link href="/kontakt" className="footer-link">Kontakt</Link>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
