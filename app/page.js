@@ -209,12 +209,48 @@ export default function Home() {
         {/* HERO */}
         <section style={{
           height: "100vh", display: "flex", justifyContent: "center", alignItems: "center",
-          backgroundImage: "linear-gradient(to bottom, #080808 0%, rgba(8,8,8,0) 15%, rgba(8,8,8,0) 85%, #F5F5F5 100%), url('/hero.jpg')",
+          backgroundImage: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.3) 100%), url('/hero.jpg')",
           backgroundSize: "cover", backgroundPosition: "center", position: "relative"
         }}>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }} style={{ textAlign: "center" }}>
-            <img src="/logo.png" alt="Hero Logo" style={{ width: "380px", marginBottom: "30px" }} />
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "52px", fontStyle: "italic", fontWeight: "300", letterSpacing: "3px" }}>Metallbau in Bestform</h1>
+            <motion.img 
+              src="/logo.png" 
+              alt="Hero Logo" 
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
+              style={{ width: "500px", marginBottom: "20px", cursor: "pointer" }} 
+            />
+            <div 
+              style={{ 
+                width: "240px", 
+                height: "4px", 
+                background: "linear-gradient(90deg, rgba(200,16,46,0.2) 0%, #ff0033 50%, rgba(200,16,46,0.2) 100%)", 
+                margin: "0 auto", 
+                opacity: 1 
+              }} 
+            />
+          </motion.div>
+          
+          {/* Scroll Arrow */}
+          <motion.div
+            onClick={() => {
+              const element = document.getElementById('leistungen');
+              element?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            style={{
+              position: "absolute",
+              bottom: "40px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              cursor: "pointer"
+            }}
+          >
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round">
+              <polyline points="9 6 15 12 21 6"></polyline>
+              <polyline points="9 15 15 21 21 15"></polyline>
+            </svg>
           </motion.div>
         </section>
 

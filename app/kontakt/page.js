@@ -232,7 +232,7 @@ export default function KontaktPage() {
         {/* HERO */}
         <section style={{
           height: "65vh", display: "flex", justifyContent: "center", alignItems: "center",
-          backgroundImage: "linear-gradient(to bottom, #080808 0%, rgba(8,8,8,0.2) 50%, #F5F5F5 100%), url('/hero_kontakt.jpg')",
+          backgroundImage: "url('/hero_kontakt.jpg')",
           backgroundSize: "cover", backgroundPosition: "center", position: "relative"
         }}>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} style={{ textAlign: "center" }}>

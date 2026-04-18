@@ -261,8 +261,8 @@ export default function KarrierePage() {
         {/* HERO */}
         <section style={{
           height: "65vh", display: "flex", justifyContent: "center", alignItems: "center",
-          backgroundImage: "linear-gradient(to bottom, #080808 0%, rgba(8,8,8,0.2) 50%, #F5F5F5 100%), url('/hero_karriere.jpg')",
-          backgroundSize: "cover", backgroundPosition: "center", position: "relative"
+          backgroundImage: "url('/hero_karriere.jpg')",
+          backgroundSize: "cover", backgroundPosition: "center 50%", position: "relative"
         }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }} style={{ textAlign: "center" }}>
             <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "62px", fontStyle: "italic", fontWeight: "300", letterSpacing: "3px" }}>Karriere</h1>

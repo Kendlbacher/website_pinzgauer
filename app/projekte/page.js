@@ -189,7 +189,7 @@ export default function ProjektePage() {
         {/* HERO SEKTION */}
         <section style={{
           height: "60vh", display: "flex", justifyContent: "center", alignItems: "center",
-          backgroundImage: "linear-gradient(to bottom, #080808 0%, rgba(8,8,8,0.2) 50%, #E2E2E2 100%), url('/hero_projekt.jpg')",
+          backgroundImage: "linear-gradient(135deg, rgba(25, 80, 150, 0.4) 0%, rgba(50, 120, 200, 0.3) 100%), url('/hero_projekt.jpg')",
           backgroundSize: "cover", backgroundPosition: "center", position: "relative"
         }}>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }} style={{ textAlign: "center" }}>
