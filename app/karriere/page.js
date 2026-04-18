@@ -177,7 +177,7 @@ export default function KarrierePage() {
           p { font-size: 14px !important; }
           
           footer { padding: 60px 20px 40px !important; }
-          footer > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+          footer > div { display: grid !important; grid-template-columns: 1fr !important; gap: 30px !important; }
         }
 
         @media screen and (max-width: 480px) {
