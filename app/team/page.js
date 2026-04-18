@@ -266,20 +266,34 @@ export default function TeamPage() {
       <section style={{ 
         height: "80vh", 
         marginTop: "78px", // Header Höhe
-        backgroundImage: "linear-gradient(to bottom, rgba(8,8,8,0.3), rgba(8,8,8,0.3)), url('/team/team-group.jpg')",
-        backgroundSize: "cover", 
-        backgroundPosition: "center 20%",
         position: "relative",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        textAlign: "center"
+        textAlign: "center",
+        overflow: "hidden"
       }}>
+        <motion.div
+          initial={{ filter: "blur(18px)" }}
+          animate={{ filter: "blur(0px)" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundImage: "linear-gradient(to bottom, rgba(8,8,8,0.3), rgba(8,8,8,0.3)), url('/team/team-group.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center 20%",
+            zIndex: 1
+          }}
+        />
         <motion.div 
             initial={{ opacity: 0, scale: 0.98 }} 
             animate={{ opacity: 1, scale: 1 }} 
             transition={{ duration: 1.2 }}
-            style={{ padding: "0 20px" }}
+            style={{ zIndex: 2, position: "relative", padding: "0 20px" }}
         >
           <h1 style={{ 
             fontFamily: "'Cormorant Garamond', serif", 
@@ -363,8 +377,27 @@ export default function TeamPage() {
             <a href="#" className="footer-link">Datenschutz</a>
           </div>
           <div style={{ display: "flex", alignItems: "flex-end" }}>
-            <motion.div onClick={scrollToTop} whileHover={{ scale: 1.1, backgroundColor: "#E31235" }} style={{ cursor: "pointer", background: "#C8102E", width: "50px", height: "50px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontSize: "10px", fontWeight: "bold", fontFamily: "'Bebas Neue', sans-serif" }}>TOP</span>
+            <motion.div
+                onClick={scrollToTop}
+                whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
+                style={{
+                  cursor: "pointer",
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  border: "none",
+                  background: "#E2E2E2",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
+                  boxShadow: "0 2px 8px #c8102e11"
+                }}
+                title="Nach oben"
+              >
+                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
+                  <polyline points="8 16 14 10 20 16"></polyline>
+                </svg>
             </motion.div>
           </div>
         </div>

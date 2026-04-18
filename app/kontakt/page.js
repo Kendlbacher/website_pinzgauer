@@ -231,11 +231,25 @@ export default function KontaktPage() {
 
         {/* HERO */}
         <section style={{
-          height: "65vh", display: "flex", justifyContent: "center", alignItems: "center",
-          backgroundImage: "url('/hero_kontakt.jpg')",
-          backgroundSize: "cover", backgroundPosition: "center", position: "relative"
+          height: "65vh", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", overflow: "hidden"
         }}>
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} style={{ textAlign: "center" }}>
+          <motion.div
+            initial={{ filter: "blur(18px)" }}
+            animate={{ filter: "blur(0px)" }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundImage: "url('/hero_kontakt.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              zIndex: 1
+            }}
+          />
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} style={{ textAlign: "center", zIndex: 2, position: "relative" }}>
             <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "62px", fontStyle: "italic", fontWeight: "300", letterSpacing: "3px" }}>Kontakt</h1>
             <p style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "4px", fontSize: "14px", marginTop: "15px", color: "#C8102E" }}>Sprechen wir über Ihr Projekt</p>
           </motion.div>
@@ -355,8 +369,27 @@ export default function KontaktPage() {
               <a href="#" className="footer-link">Datenschutz</a>
             </div>
             <div style={{ display: "flex", alignItems: "flex-end" }}>
-              <motion.div onClick={scrollToTop} whileHover={{ scale: 1.1, backgroundColor: "#E31235" }} style={{ cursor: "pointer", background: "#C8102E", width: "50px", height: "50px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ fontSize: "10px", fontWeight: "bold", fontFamily: "'Bebas Neue', sans-serif" }}>TOP</span>
+              <motion.div
+                onClick={scrollToTop}
+                whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
+                style={{
+                  cursor: "pointer",
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  border: "none",
+                  background: "#E2E2E2",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
+                  boxShadow: "0 2px 8px #c8102e11"
+                }}
+                title="Nach oben"
+              >
+                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
+                  <polyline points="8 16 14 10 20 16"></polyline>
+                </svg>
               </motion.div>
             </div>
           </div>
