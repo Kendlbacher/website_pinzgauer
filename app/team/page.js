@@ -347,9 +347,9 @@ export default function TeamPage() {
         {/* Produktion: Klassisches Grid für viele Personen */}
         <div style={{ background: "#E2E2E2" }}>
           <SectionDivider title="Produktion" />
-          <div className="grid-container">
-            {teamData.produktion.map((m, i) => <TeamMember key={i} {...m} darkText={true} />)}
-          </div>
+            <div className="grid-container" style={{ justifyItems: "center" }}>
+              {teamData.produktion.map((m, i) => <TeamMember key={i} {...m} darkText={true} />)}
+            </div>
         </div>
       </main>
 
@@ -378,26 +378,26 @@ export default function TeamPage() {
           </div>
           <div style={{ display: "flex", alignItems: "flex-end" }}>
             <motion.div
-                onClick={scrollToTop}
-                whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
-                style={{
-                  cursor: "pointer",
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "50%",
-                  border: "none",
-                  background: "#E2E2E2",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
-                  boxShadow: "0 2px 8px #c8102e11"
-                }}
-                title="Nach oben"
-              >
-                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
-                  <polyline points="8 16 14 10 20 16"></polyline>
-                </svg>
+              onClick={scrollToTop}
+              whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
+              style={{
+                cursor: "pointer",
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                border: "none",
+                background: "#E2E2E2",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
+                boxShadow: "0 2px 8px #c8102e11"
+              }}
+              title="Nach oben"
+            >
+              <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
+                <polyline points="8 16 14 10 20 16"></polyline>
+              </svg>
             </motion.div>
           </div>
         </div>

@@ -244,7 +244,10 @@ export default function Home() {
                     <style>{`
                       @media (max-width: 600px) {
                         .hero-logo-responsive {
-                          width: 180px !important;
+                          width: 240px !important;
+                          margin-left: auto !important;
+                          margin-right: auto !important;
+                          display: block !important;
                         }
                       }
                     `}</style>
