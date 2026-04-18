@@ -135,8 +135,8 @@ export default function Home() {
         @media (max-width: 480px) {
           header { padding: 10px 15px !important; position: relative; }
           header img { height: 30px !important; }
-          nav { display: none; }
-          .hamburger { display: flex; }
+          nav { display: none !important; }
+          .hamburger { display: flex !important; }
           
           section { padding: 0 15px 40px !important; }
           
@@ -195,12 +195,12 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
               >
-                <Link href="/unternehmen" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Unternehmen</Link>
-                <a href="#leistungen" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Leistungen</a>
-                <Link href="/projekte" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Projekte</Link>
-                <Link href="/team" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Team</Link>
-                <Link href="/karriere" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Karriere</Link>
-                <Link href="/kontakt" className="mobile-menu" onClick={() => setIsMobileMenuOpen(false)}>Kontakt</Link>
+                <Link href="/unternehmen" onClick={() => setIsMobileMenuOpen(false)}>Unternehmen</Link>
+                <a href="#leistungen" onClick={() => setIsMobileMenuOpen(false)}>Leistungen</a>
+                <Link href="/projekte" onClick={() => setIsMobileMenuOpen(false)}>Projekte</Link>
+                <Link href="/team" onClick={() => setIsMobileMenuOpen(false)}>Team</Link>
+                <Link href="/karriere" onClick={() => setIsMobileMenuOpen(false)}>Karriere</Link>
+                <Link href="/kontakt" onClick={() => setIsMobileMenuOpen(false)}>Kontakt</Link>
               </motion.div>
             )}
           </AnimatePresence>
