@@ -228,12 +228,26 @@ export default function Home() {
           />
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }} style={{ textAlign: "center", zIndex: 2, position: "relative" }}>
             <motion.img 
-              src="/logo.png" 
-              alt="Hero Logo" 
+              src="/logo.png"
+              alt="Hero Logo"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
-              style={{ width: "500px", marginBottom: "20px", cursor: "pointer" }} 
+              style={{
+                width: "500px",
+                maxWidth: "90vw",
+                marginBottom: "20px",
+                cursor: "pointer",
+                display: "block"
+              }}
+              className="hero-logo-responsive"
             />
+                    <style>{`
+                      @media (max-width: 600px) {
+                        .hero-logo-responsive {
+                          width: 180px !important;
+                        }
+                      }
+                    `}</style>
             <div 
               style={{ 
                 width: "240px", 
