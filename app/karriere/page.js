@@ -157,12 +157,46 @@ export default function KarrierePage() {
 
         .footer-link { color: #D1D1D1; text-decoration: none; font-size: 13px; transition: color 0.2s; }
         .footer-link:hover { color: #FFF; }
-        
+
+        @media (max-width: 1024px) {
+          header { padding: 15px 40px !important; }
+          .nav-link { font-size: 10px; gap: 20px; }
+          section { padding: 0 40px 80px !important; }
+        }
+
+        @media (max-width: 768px) {
+          header { padding: 12px 20px !important; }
+          nav { gap: 15px !important; }
+          .nav-link { font-size: 9px; letter-spacing: 1px; }
+          
+          section { padding: 0 20px 60px !important; }
+          
+          h1 { font-size: 36px !important; }
+          h2 { font-size: 28px !important; }
+          h3 { font-size: 20px !important; }
+          p { font-size: 14px !important; }
+          
+          footer { padding: 60px 20px 40px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 30px !important; }
+        }
+
         @media screen and (max-width: 480px) {
           header { padding: 10px 15px !important; position: relative; }
           header img { height: 30px !important; }
           nav { display: none !important; }
           .hamburger { display: flex !important; }
+          
+          section { padding: 0 15px 40px !important; }
+          
+          h1 { font-size: 28px !important; }
+          h2 { font-size: 20px !important; }
+          h3 { font-size: 16px !important; }
+          h4 { font-size: 14px !important; }
+          p { font-size: 12px !important; }
+          
+          footer { padding: 40px 15px 30px !important; }
+          footer > div { grid-template-columns: 1fr !important; gap: 20px !important; margin-bottom: 30px !important; }
+          footer > div > div { width: 100% !important; }
         }
       `}</style>
 
