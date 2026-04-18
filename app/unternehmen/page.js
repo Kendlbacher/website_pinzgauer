@@ -228,15 +228,23 @@ export default function Unternehmen() {
                   Wir verbinden traditionelle Schmiedekunst mit modernster Plasma-Technologie und computergestützter Fertigung. Unser Ziel ist es, jedes Projekt – ob privates Geländer oder komplexe Industrie-Stahlbrücke – mit höchster Präzision und Verlässlichkeit umzusetzen.
                 </p>
               </motion.div>
-              <motion.div {...fadeInUp} transition={{ delay: 0.2 }}>
-                 <motion.img 
-                   whileHover={{ scale: 1.05 }}
-                   transition={{ duration: 0.3 }}
-                   src="/unternehmen/unternehmen1.jpg" 
-                   alt="Philosophie" 
-                   style={{ width: "70%", borderRadius: "8px", display: "block", margin: "0 auto" }} 
-                 />
-              </motion.div>
+               <motion.div {...fadeInUp} transition={{ delay: 0.2 }}>
+                  <motion.img 
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    src="/unternehmen/unternehmen1.jpg" 
+                    alt="Philosophie" 
+                    style={{ width: "70%", borderRadius: "8px", display: "block", margin: "0 auto 32px auto" }} 
+                  />
+                  {/* Handwerkspreis Bild direkt darunter */}
+                  <motion.img
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    src="/unternehmen/handwerkspreis.jpg"
+                    alt="Handwerkspreis Auszeichnung"
+                    style={{ width: "38%", maxWidth: "180px", borderRadius: "10px", display: "block", margin: "0 auto" }}
+                  />
+               </motion.div>
             </div>
           </section>
         </div>
