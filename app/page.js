@@ -6,36 +6,58 @@ import Link from "next/link";
 
 // Scroll-Animations-Varianten
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-100px" },
-  transition: { duration: 0.8, ease: "easeOut" }
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] }
 };
 
-const SectionDivider = ({ title, textColor = "#C8102E" }) => (
+const staggerItem = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+};
+
+const SectionDivider = ({ title, subtitle, textColor = "#C8102E" }) => (
   <div style={{
-    display: "flex",
-    alignItems: "center",
-    padding: "80px 80px 40px 80px",
-    position: "relative"
+    padding: "100px 80px 50px 80px",
+    position: "relative",
+    maxWidth: "1400px",
+    margin: "0 auto"
   }}>
-    <motion.span
-      initial={{ opacity: 0, x: -10 }}
-      whileInView={{ opacity: 1, x: 0 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      style={{
-        paddingRight: "25px",
-        color: textColor,
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontWeight: "400",
-        letterSpacing: "5px",
-        fontSize: "12px",
-        textTransform: "uppercase"
-      }}
+      transition={{ duration: 0.8 }}
     >
-      {title}
-    </motion.span>
-    <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, rgba(200, 16, 46, 0.2), transparent)" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: subtitle ? "12px" : "0" }}>
+        <div style={{ width: "40px", height: "1px", background: textColor }} />
+        <span style={{
+          color: textColor,
+          fontFamily: "'Inter', sans-serif",
+          fontWeight: "600",
+          letterSpacing: "4px",
+          fontSize: "11px",
+          textTransform: "uppercase"
+        }}>
+          {title}
+        </span>
+      </div>
+      {subtitle && (
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: "42px",
+          fontWeight: "600",
+          color: "#1a1a1a",
+          marginTop: "15px",
+          lineHeight: "1.2",
+          letterSpacing: "-0.5px"
+        }}>
+          {subtitle}
+        </h2>
+      )}
+    </motion.div>
   </div>
 );
 
@@ -67,13 +89,15 @@ export default function Home() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: #080808; color: #FFFFFF; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+        body { background: #0a0a0a; color: #FFFFFF; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         
-        .nav-link { color: #D1D1D1; text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.25s ease; cursor: pointer; }
+        .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; position: relative; }
         .nav-link:hover { color: #FFF; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #C8102E; transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
         
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; align-items: flex-end; margin-right: 15px; }
         .hamburger span { width: 24px; height: 2px; background: #D1D1D1; transition: all 0.3s ease; }
@@ -81,29 +105,29 @@ export default function Home() {
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
         
-        .mobile-menu { display: none !important; position: absolute; top: 60px; right: 0; background: rgba(8,8,8,0.95); backdrop-filter: blur(15px); flex-direction: column; width: calc(100% - 40px); padding: 20px; border-top: 1px solid rgba(255,255,255,0.05); z-index: 999; box-sizing: border-box; }
+        .mobile-menu { display: none !important; position: absolute; top: 60px; right: 0; background: rgba(10,10,10,0.98); backdrop-filter: blur(20px); flex-direction: column; width: calc(100% - 40px); padding: 25px; border-top: 1px solid rgba(255,255,255,0.06); z-index: 999; box-sizing: border-box; }
         .mobile-menu.active { display: flex !important; }
-        .mobile-menu a { color: #D1D1D1; text-decoration: none; padding: 12px 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+        .mobile-menu a { color: rgba(255,255,255,0.6); text-decoration: none; padding: 14px 0; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color 0.2s; font-family: 'Inter', sans-serif; }
         .mobile-menu a:hover { color: #FFF; }
         
-        .mobile-menu.active { display: flex; }
-        .mobile-menu a { color: #D1D1D1; text-decoration: none; padding: 12px 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
-        .mobile-menu a:hover { color: #FFF; }
-        
-        /* Leistungs-Karten (etwas heller) */
-        .card-dark { background: #262626; border: 1px solid #333; transition: all 0.4s ease; height: 100%; max-height: 280px; position: relative; overflow: hidden; }
-        .card-dark:hover { transform: translateY(-8px); border-color: #C8102E; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .card-dark:hover .card-num-bg { opacity: 0.12 !important; }
+        /* Leistungs-Karten */
+        .card-dark { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.06); transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); height: 100%; position: relative; overflow: hidden; }
+        .card-dark::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #C8102E; transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease; }
+        .card-dark:hover { transform: translateY(-10px); border-color: rgba(200,16,46,0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,16,46,0.1); }
+        .card-dark:hover::before { transform: scaleX(1); }
+        .card-dark:hover .card-num-bg { opacity: 0.08 !important; }
 
         /* Projekt-Karten */
-        .card-project { background: #262626; border: 1px solid #333; transition: all 0.4s ease; height: 100%; borderRadius: "8px"; }
-        .card-project:hover { transform: translateY(-8px); border-color: #C8102E; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .card-project { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.06); transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); height: 100%; overflow: hidden; }
+        .card-project:hover { transform: translateY(-10px); border-color: rgba(200,16,46,0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .card-project .project-img { transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1); }
+        .card-project:hover .project-img { transform: scale(1.05); }
         
-        .card-btn { margin-top: 25px; padding: 12px 24px; border: 1px solid #C8102E; background: #C8102E; color: #FFF; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; width: fit-content; }
+        .card-btn { margin-top: 25px; padding: 14px 28px; border: 1px solid #C8102E; background: #C8102E; color: #FFF; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.4s ease; width: fit-content; font-family: 'Inter', sans-serif; font-weight: 600; }
         .card-btn:hover { background: transparent; color: #C8102E; }
 
-        .footer-link { color: #D1D1D1; text-decoration: none; font-size: 13px; transition: color 0.2s; }
-        .footer-link:hover { color: #FFF; }
+        .footer-link { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: all 0.3s ease; font-family: 'Inter', sans-serif; letter-spacing: 0.3px; }
+        .footer-link:hover { color: #FFF; padding-left: 5px; }
 
         /* MOBILE RESPONSIVE */
         @media (max-width: 1024px) {
@@ -162,9 +186,9 @@ export default function Home() {
         {/* HEADER */}
         <header style={{
           position: "fixed", top: 0, width: "100%", zIndex: 1000,
-          background: "rgba(8,8,8,0.85)", backdropFilter: "blur(15px)",
-          padding: "20px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
-          borderBottom: "1px solid rgba(255,255,255,0.05)"
+          background: "rgba(10,10,10,0.9)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+          padding: "18px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderBottom: "1px solid rgba(255,255,255,0.04)"
         }}>
           <div onClick={scrollToTop} style={{ cursor: "pointer" }}>
             <img src="/logo.png" alt="Logo" style={{ height: "38px" }} />
@@ -211,31 +235,31 @@ export default function Home() {
           height: "100vh", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", overflow: "hidden"
         }}>
           <motion.div
-            initial={{ filter: "blur(18px)" }}
-            animate={{ filter: "blur(0px)" }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            initial={{ filter: "blur(18px)", scale: 1.05 }}
+            animate={{ filter: "blur(0px)", scale: 1 }}
+            transition={{ duration: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
             style={{
               position: "absolute",
               top: 0,
               left: 0,
               width: "100%",
               height: "100%",
-              backgroundImage: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.3) 100%), url('/hero.jpg')",
+              backgroundImage: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.7) 100%), url('/hero.jpg')",
               backgroundSize: "cover",
               backgroundPosition: "center",
               zIndex: 1
             }}
           />
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5 }} style={{ textAlign: "center", zIndex: 2, position: "relative" }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.5, delay: 0.3 }} style={{ textAlign: "center", zIndex: 2, position: "relative" }}>
             <motion.img 
               src="/logo.png"
               alt="Hero Logo"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 4, ease: "easeInOut", repeat: Infinity }}
               style={{
-                width: "500px",
-                maxWidth: "90vw",
-                marginBottom: "20px",
+                width: "460px",
+                maxWidth: "85vw",
+                marginBottom: "30px",
                 cursor: "pointer",
                 display: "block"
               }}
@@ -244,7 +268,7 @@ export default function Home() {
                     <style>{`
                       @media (max-width: 600px) {
                         .hero-logo-responsive {
-                          width: 240px !important;
+                          width: 220px !important;
                           margin-left: auto !important;
                           margin-right: auto !important;
                           display: block !important;
@@ -253,13 +277,28 @@ export default function Home() {
                     `}</style>
             <div 
               style={{ 
-                width: "240px", 
-                height: "4px", 
-                background: "linear-gradient(90deg, rgba(200,16,46,0.2) 0%, #ff0033 50%, rgba(200,16,46,0.2) 100%)", 
-                margin: "0 auto", 
+                width: "60px", 
+                height: "2px", 
+                background: "#C8102E", 
+                margin: "0 auto 25px", 
                 opacity: 1 
               }} 
             />
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 1.2 }}
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "13px",
+                letterSpacing: "5px",
+                textTransform: "uppercase",
+                color: "rgba(255,255,255,0.5)",
+                fontWeight: "400"
+              }}
+            >
+              Stahl- und Metallbau seit Generationen
+            </motion.p>
           </motion.div>
           {/* Scroll Arrow */}
           <motion.div
@@ -267,41 +306,44 @@ export default function Home() {
               const element = document.getElementById('leistungen');
               element?.scrollIntoView({ behavior: 'smooth' });
             }}
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: [0, 8, 0] }}
+            transition={{ opacity: { delay: 1.5, duration: 1 }, y: { duration: 2.5, repeat: Infinity, ease: "easeInOut" } }}
             style={{
               position: "absolute",
-              bottom: "40px",
+              bottom: "50px",
               left: "50%",
               transform: "translateX(-50%)",
               cursor: "pointer",
               zIndex: 2
             }}
           >
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#FFF" strokeWidth="2" strokeLinecap="round">
-              <polyline points="9 6 15 12 21 6"></polyline>
-              <polyline points="9 15 15 21 21 15"></polyline>
-            </svg>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
+              <span style={{ fontSize: "9px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", fontFamily: "'Inter', sans-serif" }}>Scroll</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round">
+                <polyline points="4 7 10 13 16 7"></polyline>
+              </svg>
+            </div>
           </motion.div>
         </section>
 
         {/* 1. LEISTUNGEN */}
-        <div id="leistungen" style={{ background: "#F5F5F5", color: "#111" }}>
-          <SectionDivider title="Unsere Leistungen" />
-          <section style={{ padding: "0 80px 120px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "25px" }}>
+        <div id="leistungen" style={{ background: "#F7F7F5", color: "#111" }}>
+          <SectionDivider title="Leistungen" subtitle="Was wir für Sie tun" />
+          <section style={{ padding: "0 80px 140px" }}>
+            <div style={{ maxWidth: "1400px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
               {leistungen.map((item, i) => (
                 <motion.div 
                   key={i} 
-                  {...fadeInUp}
-                  transition={{ delay: i * 0.1, duration: 0.8 }}
+                  {...staggerItem}
+                  transition={{ delay: i * 0.08, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
                   className="card-dark" 
-                  style={{ padding: "60px 40px", borderRadius: "8px", display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: "280px" }}
+                  style={{ padding: "50px 40px", borderRadius: "4px", display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: "300px" }}
                 >
-                  <span className="card-num-bg" style={{ position: "absolute", top: "10px", right: "20px", fontFamily: "'Bebas Neue', sans-serif", fontSize: "100px", color: "#FFF", opacity: 0.07, transition: "opacity 0.3s ease" }}>{item.n}</span>
-                  <div style={{ width: "30px", height: "2px", background: "#C8102E", marginBottom: "25px" }} />
-                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "28px", marginBottom: "15px", color: "#FFFFFF" }}>{item.t}</h3>
-                  <p style={{ color: "#BBBBBB", fontSize: "15px", lineHeight: "1.8" }}>{item.d}</p>
+                  <span className="card-num-bg" style={{ position: "absolute", top: "15px", right: "25px", fontFamily: "'Playfair Display', serif", fontSize: "90px", fontWeight: "700", color: "#FFF", opacity: 0.04, transition: "opacity 0.4s ease", lineHeight: "1" }}>{item.n}</span>
+                  <div style={{ width: "25px", height: "2px", background: "#C8102E", marginBottom: "28px" }} />
+                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "26px", fontWeight: "600", marginBottom: "16px", color: "#FFFFFF", letterSpacing: "-0.3px" }}>{item.t}</h3>
+                  <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", lineHeight: "1.9", fontWeight: "300" }}>{item.d}</p>
                   {item.isLast && <button className="card-btn">Anfrage stellen</button>}
                 </motion.div>
               ))}
@@ -310,17 +352,23 @@ export default function Home() {
         </div>
 
         {/* 2. PROJEKTE */}
-        <div id="projekte" style={{ background: "#E2E2E2", color: "#111", borderTop: "1px solid rgba(0,0,0,0.03)" }}>
-          <SectionDivider title="Aktuelle Projekte" />
-          <section style={{ padding: "0 80px 140px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: "30px" }}>
+        <div id="projekte" style={{ background: "#EDEDEB", color: "#111" }}>
+          <SectionDivider title="Projekte" subtitle="Referenzen & Arbeiten" />
+          <section style={{ padding: "0 80px 160px" }}>
+            <div style={{ maxWidth: "1400px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: "25px" }}>
               {projekte.map((proj, i) => (
-                <motion.div key={proj.id} {...fadeInUp} transition={{ delay: i * 0.2, duration: 0.8 }} className="card-project" style={{ overflow: "hidden", borderRadius: "8px" }}>
-                  <div style={{ height: "300px", backgroundImage: `url('${proj.bild}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
-                  <div style={{ padding: "40px" }}>
-                    <p style={{ color: "#C8102E", fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px", fontWeight: "600" }}>{proj.kategorie}</p>
-                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "24px", marginBottom: "12px", color: "#FFFFFF" }}>{proj.name}</h3>
-                    <p style={{ color: "#BBBBBB", fontSize: "14px", lineHeight: "1.8" }}>{proj.text}</p>
+                <motion.div key={proj.id} {...staggerItem} transition={{ delay: i * 0.15, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }} className="card-project" style={{ borderRadius: "4px" }}>
+                  <div style={{ height: "280px", overflow: "hidden" }}>
+                    <div className="project-img" style={{ height: "100%", backgroundImage: `url('${proj.bild}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
+                  </div>
+                  <div style={{ padding: "35px 40px 40px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "14px" }}>
+                      <span style={{ color: "#C8102E", fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", fontWeight: "600", fontFamily: "'Inter', sans-serif" }}>{proj.kategorie}</span>
+                      <span style={{ color: "rgba(255,255,255,0.2)", fontSize: "10px" }}>—</span>
+                      <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "10px", letterSpacing: "2px", fontFamily: "'Inter', sans-serif" }}>{proj.jahr}</span>
+                    </div>
+                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "22px", fontWeight: "600", marginBottom: "14px", color: "#FFFFFF", letterSpacing: "-0.3px", lineHeight: "1.3" }}>{proj.name}</h3>
+                    <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "14px", lineHeight: "1.9", fontWeight: "300" }}>{proj.text}</p>
                   </div>
                 </motion.div>
               ))}
@@ -329,11 +377,11 @@ export default function Home() {
         </div>
 
         {/* 3. MEDIA */}
-        <div style={{ background: "#F5F5F5", color: "#111", borderTop: "1px solid rgba(0,0,0,0.03)" }}>
-          <SectionDivider title="Media & Video" />
-          <section style={{ padding: "0 80px 160px" }}>
+        <div style={{ background: "#F7F7F5", color: "#111" }}>
+          <SectionDivider title="Media" subtitle="Einblicke in unsere Arbeit" />
+          <section style={{ padding: "0 80px 180px" }}>
             <motion.div {...fadeInUp} style={{ maxWidth: "1050px", margin: "0 auto" }}>
-               <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, background: "#000", borderRadius: "2px", overflow: "hidden", boxShadow: "0 30px 60px rgba(0,0,0,0.12)" }}>
+               <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, background: "#0a0a0a", borderRadius: "4px", overflow: "hidden", boxShadow: "0 40px 80px rgba(0,0,0,0.15)" }}>
                   <iframe style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }} src="https://www.youtube.com/embed/jItsMRP8Dqk" frameBorder="0" allowFullScreen />
                </div>
             </motion.div>
@@ -341,55 +389,55 @@ export default function Home() {
         </div>
 
         {/* FOOTER */}
-        <footer style={{ background: "#0C0C0C", padding: "100px 80px 60px", color: "#FFF" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 80px" }}>
+        <footer style={{ background: "#0a0a0a", padding: "120px 80px 60px", color: "#FFF" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 100px" }}>
             <motion.div {...fadeInUp}>
-              <img src="/logo.png" alt="Logo" style={{ height: "45px", marginBottom: "30px" }} />
-              <p style={{ color: "#CCCCCC", fontSize: "14px", lineHeight: "2.2" }}>
-                <strong>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
+              <img src="/logo.png" alt="Logo" style={{ height: "40px", marginBottom: "35px", opacity: 0.9 }} />
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "14px", lineHeight: "2.4", fontWeight: "300" }}>
+                <strong style={{ color: "rgba(255,255,255,0.7)", fontWeight: "600" }}>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
                 Gewerbstraße 9, A-5671 Bruck<br />
                 info@psmb.at
               </p>
             </motion.div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Navigation</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Navigation</p>
               <Link href="/unternehmen" className="footer-link">Unternehmen</Link>
               <Link href="/projekte" className="footer-link">Projekte</Link>
               <Link href="/karriere" className="footer-link">Karriere</Link>
               <Link href="/kontakt" className="footer-link">Kontakt</Link>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Rechtliches</p>
-              <a href="#" className="footer-link">Impressum</a>
-              <a href="#" className="footer-link">Datenschutz</a>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Rechtliches</p>
+              <Link href="/impressum" className="footer-link">Impressum</Link>
+              <Link href="/datenschutz" className="footer-link">Datenschutz</Link>
             </div>
             <div style={{ display: "flex", alignItems: "flex-end" }}>
               <motion.div
                 onClick={scrollToTop}
-                whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
+                whileHover={{ scale: 1.1, y: -3 }}
+                whileTap={{ scale: 0.95 }}
                 style={{
                   cursor: "pointer",
-                  width: "40px",
-                  height: "40px",
+                  width: "44px",
+                  height: "44px",
                   borderRadius: "50%",
-                  border: "none",
-                  background: "#E2E2E2",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "transparent",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
-                  boxShadow: "0 2px 8px #c8102e11"
+                  transition: "all 0.3s ease",
                 }}
                 title="Nach oben"
               >
-                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
-                  <polyline points="8 16 14 10 20 16"></polyline>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" strokeLinecap="round">
+                  <polyline points="3 10 8 5 13 10"></polyline>
                 </svg>
               </motion.div>
             </div>
           </div>
-          <div style={{ borderTop: "1px solid #1A1A1A", paddingTop: "40px", fontSize: "12px", color: "#666", textAlign: "center" }}>
-            (c) 2025 Pinzgauer Stahl- und Metallbau GmbH.
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "40px", fontSize: "12px", color: "rgba(255,255,255,0.25)", textAlign: "center", letterSpacing: "0.5px" }}>
+            © 2025 Pinzgauer Stahl- und Metallbau GmbH. Alle Rechte vorbehalten.
           </div>
         </footer>
       </div>

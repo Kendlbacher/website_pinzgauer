@@ -13,30 +13,46 @@ const fadeInUp = {
 };
 
 // Konsistenter SectionDivider der Main-Seite
-const SectionDivider = ({ title, textColor = "#C8102E" }) => (
+const SectionDivider = ({ title, subtitle, textColor = "#C8102E" }) => (
   <div style={{
-    display: "flex",
-    alignItems: "center",
-    padding: "80px 80px 40px 80px",
-    position: "relative"
+    padding: "100px 80px 50px 80px",
+    position: "relative",
+    maxWidth: "1400px",
+    margin: "0 auto"
   }}>
-    <motion.span
-      initial={{ opacity: 0, x: -10 }}
-      whileInView={{ opacity: 1, x: 0 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      style={{
-        paddingRight: "25px",
-        color: textColor,
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontWeight: "400",
-        letterSpacing: "5px",
-        fontSize: "12px",
-        textTransform: "uppercase"
-      }}
+      transition={{ duration: 0.8 }}
     >
-      {title}
-    </motion.span>
-    <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, rgba(200, 16, 46, 0.2), transparent)" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: subtitle ? "12px" : "0" }}>
+        <div style={{ width: "40px", height: "1px", background: textColor }} />
+        <span style={{
+          color: textColor,
+          fontFamily: "'Inter', sans-serif",
+          fontWeight: "600",
+          letterSpacing: "4px",
+          fontSize: "11px",
+          textTransform: "uppercase"
+        }}>
+          {title}
+        </span>
+      </div>
+      {subtitle && (
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: "42px",
+          fontWeight: "600",
+          color: "#1a1a1a",
+          marginTop: "15px",
+          lineHeight: "1.2",
+          letterSpacing: "-0.5px"
+        }}>
+          {subtitle}
+        </h2>
+      )}
+    </motion.div>
   </div>
 );
 
@@ -55,10 +71,11 @@ export default function KontaktPage() {
 
   const labelStyle = {
     color: "#C8102E",
-    fontSize: "11px",
-    letterSpacing: "3px",
+    fontSize: "10px",
+    letterSpacing: "4px",
     textTransform: "uppercase",
-    fontFamily: "'Bebas Neue', sans-serif",
+    fontFamily: "'Inter', sans-serif",
+    fontWeight: "600",
     display: "block",
     marginBottom: "8px"
   };
@@ -67,7 +84,7 @@ export default function KontaktPage() {
     color: "#444444",
     fontSize: "16px",
     lineHeight: "1.6",
-    fontFamily: "'DM Sans', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     textDecoration: "none",
     marginBottom: "35px",
     display: "block"
@@ -77,26 +94,28 @@ export default function KontaktPage() {
     width: "100%",
     background: "transparent",
     border: "none",
-    borderBottom: "1px solid #444",
+    borderBottom: "1px solid rgba(255,255,255,0.15)",
     padding: "12px 0",
     color: "#FFFFFF",
     fontSize: "14px",
     outline: "none",
     marginBottom: "25px",
     transition: "border-color 0.3s ease",
-    fontFamily: "'DM Sans', sans-serif"
+    fontFamily: "'Inter', sans-serif"
   };
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: #080808; color: #FFFFFF; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+        body { background: #0a0a0a; color: #FFFFFF; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         
-        .nav-link { color: #D1D1D1; text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.25s ease; cursor: pointer; }
+        .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; position: relative; }
         .nav-link:hover { color: #FFF; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #C8102E; transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
         
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; align-items: flex-end; margin-right: 15px; }
         .hamburger span { width: 24px; height: 2px; background: #D1D1D1; transition: all 0.3s ease; }
@@ -109,14 +128,14 @@ export default function KontaktPage() {
         .mobile-menu a { color: #D1D1D1; text-decoration: none; padding: 12px 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
         .mobile-menu a:hover { color: #FFF; }
         
-        .footer-link { color: #D1D1D1; text-decoration: none; font-size: 13px; transition: color 0.2s; }
-        .footer-link:hover { color: #FFF; }
+        .footer-link { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: all 0.3s ease; font-family: 'Inter', sans-serif; letter-spacing: 0.3px; }
+        .footer-link:hover { color: #FFF; padding-left: 5px; }
 
         input:focus, textarea:focus { border-bottom: 1px solid #C8102E !important; }
         
-        .form-card { background: #262626; padding: 50px; border-radius: 8px; border: 1px solid #333; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+        .form-card { background: #1a1a1a; padding: 50px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
         
-        .submit-btn { background: #C8102E; color: #FFF; border: 1px solid #C8102E; padding: 15px 35px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; }
+        .submit-btn { background: #C8102E; color: #FFF; border: 1px solid #C8102E; padding: 15px 35px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: 'Inter', sans-serif; font-weight: 600; }
         .submit-btn:hover { background: transparent; color: #C8102E; }
 
         @media (max-width: 900px) {
@@ -176,9 +195,9 @@ export default function KontaktPage() {
         {/* HEADER */}
         <header style={{
           position: "fixed", top: 0, width: "100%", zIndex: 1000,
-          background: "rgba(8,8,8,0.85)", backdropFilter: "blur(15px)",
-          padding: "20px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
-          borderBottom: "1px solid rgba(255,255,255,0.05)"
+          background: "rgba(10,10,10,0.9)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+          padding: "18px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderBottom: "1px solid rgba(255,255,255,0.04)"
         }}>
           <Link href="/" style={{ cursor: "pointer" }}>
             <img src="/logo.png" alt="Logo" style={{ height: "38px" }} />
@@ -250,14 +269,14 @@ export default function KontaktPage() {
             }}
           />
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2 }} style={{ textAlign: "center", zIndex: 2, position: "relative" }}>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "62px", fontStyle: "italic", fontWeight: "300", letterSpacing: "3px" }}>Kontakt</h1>
-            <p style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "4px", fontSize: "14px", marginTop: "15px", color: "#C8102E" }}>Sprechen wir über Ihr Projekt</p>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "58px", fontWeight: "600", letterSpacing: "-1px" }}>Kontakt</h1>
+            <p style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "5px", fontSize: "12px", fontWeight: "500", marginTop: "20px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>Sprechen wir über Ihr Projekt</p>
           </motion.div>
         </section>
 
         {/* 1. INFOS & FORMULAR - Grau wie LEISTUNGEN (#F5F5F5) */}
-        <div style={{ background: "#F5F5F5", color: "#111" }}>
-          <SectionDivider title="Anfrage senden" />
+        <div style={{ background: "#F7F7F5", color: "#111" }}>
+          <SectionDivider title="Kontakt" subtitle="Anfrage senden" />
           <section className="page-padding" style={{ padding: "0 80px 120px" }}>
             <div className="kontakt-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "100px", maxWidth: "1300px", margin: "0 auto" }}>
               
@@ -287,12 +306,12 @@ export default function KontaktPage() {
                   <>
                     {/* Neue Überschrift innerhalb der Box */}
                     <h2 style={{ 
-                      fontFamily: "'Cormorant Garamond', serif", 
-                      fontSize: "32px", 
-                      fontStyle: "italic", 
+                      fontFamily: "'Playfair Display', serif", 
+                      fontSize: "30px",
                       marginBottom: "30px", 
                       color: "#FFFFFF",
-                      fontWeight: "300"
+                      fontWeight: "600",
+                      letterSpacing: "-0.3px"
                     }}>
                       Anfrage senden
                     </h2>
@@ -315,7 +334,7 @@ export default function KontaktPage() {
                   </>
                 ) : (
                   <div style={{ textAlign: "center", padding: "40px 0" }}>
-                    <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "32px", color: "#C8102E", marginBottom: "15px" }}>Vielen Dank!</h3>
+                    <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "30px", color: "#C8102E", marginBottom: "15px", fontWeight: "600" }}>Vielen Dank!</h3>
                     <p style={{ color: "#AAA" }}>Ihre Nachricht wurde erfolgreich versendet. Wir melden uns in Kürze bei Ihnen.</p>
                   </div>
                 )}
@@ -325,8 +344,8 @@ export default function KontaktPage() {
         </div>
 
         {/* 2. STANDORT - Grau wie PROJEKTE (#E2E2E2) */}
-        <div style={{ background: "#E2E2E2", color: "#111" }}>
-          <SectionDivider title="Anfahrt / Standort" />
+        <div style={{ background: "#EDEDEB", color: "#111" }}>
+          <SectionDivider title="Standort" subtitle="Anfahrt" />
           <section style={{ padding: "0 80px 140px" }}>
             <motion.div {...fadeInUp} style={{ 
               width: "100%", 
@@ -346,55 +365,54 @@ export default function KontaktPage() {
         </div>
 
         {/* FOOTER */}
-        <footer style={{ background: "#0C0C0C", padding: "100px 80px 60px", color: "#FFF" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 80px" }}>
+        <footer style={{ background: "#0a0a0a", padding: "120px 80px 60px", color: "#FFF" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 100px" }}>
             <motion.div {...fadeInUp}>
-              <img src="/logo.png" alt="Logo" style={{ height: "45px", marginBottom: "30px" }} />
-              <p style={{ color: "#CCCCCC", fontSize: "14px", lineHeight: "2.2" }}>
-                <strong>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
+              <img src="/logo.png" alt="Logo" style={{ height: "40px", marginBottom: "35px", opacity: 0.9 }} />
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "14px", lineHeight: "2.4", fontWeight: "300" }}>
+                <strong style={{ color: "rgba(255,255,255,0.7)", fontWeight: "600" }}>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
                 Gewerbestrasse 9, A-5671 Bruck<br />
                 info@psmb.at
               </p>
             </motion.div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Navigation</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Navigation</p>
               <Link href="/unternehmen" className="footer-link">Unternehmen</Link>
               <Link href="/projekte" className="footer-link">Projekte</Link>
               <Link href="/karriere" className="footer-link">Karriere</Link>
               <Link href="/kontakt" className="footer-link">Kontakt</Link>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Rechtliches</p>
-              <a href="#" className="footer-link">Impressum</a>
-              <a href="#" className="footer-link">Datenschutz</a>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Rechtliches</p>
+              <Link href="/impressum" className="footer-link">Impressum</Link>
+              <Link href="/datenschutz" className="footer-link">Datenschutz</Link>
             </div>
             <div style={{ display: "flex", alignItems: "flex-end" }}>
               <motion.div
                 onClick={scrollToTop}
-                whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
+                whileHover={{ scale: 1.08, borderColor: "rgba(255,255,255,0.4)" }}
                 style={{
                   cursor: "pointer",
-                  width: "40px",
-                  height: "40px",
+                  width: "48px",
+                  height: "48px",
                   borderRadius: "50%",
-                  border: "none",
-                  background: "#E2E2E2",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  background: "transparent",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
-                  boxShadow: "0 2px 8px #c8102e11"
+                  transition: "all 0.3s ease"
                 }}
                 title="Nach oben"
               >
-                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
+                <svg width="18" height="18" viewBox="0 0 28 28" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round">
                   <polyline points="8 16 14 10 20 16"></polyline>
                 </svg>
               </motion.div>
             </div>
           </div>
-          <div style={{ borderTop: "1px solid #1A1A1A", paddingTop: "40px", fontSize: "12px", color: "#666", textAlign: "center" }}>
-            (c) 2025 Pinzgauer Stahl- und Metallbau GmbH.
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "40px", fontSize: "12px", color: "rgba(255,255,255,0.25)", textAlign: "center", letterSpacing: "0.5px" }}>
+            © 2025 Pinzgauer Stahl- und Metallbau GmbH. Alle Rechte vorbehalten.
           </div>
         </footer>
       </div>

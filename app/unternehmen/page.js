@@ -12,30 +12,46 @@ const fadeInUp = {
   transition: { duration: 0.8, ease: "easeOut" }
 };
 
-const SectionDivider = ({ title, textColor = "#C8102E" }) => (
+const SectionDivider = ({ title, subtitle, textColor = "#C8102E" }) => (
   <div style={{
-    display: "flex",
-    alignItems: "center",
-    padding: "80px 80px 40px 80px",
-    position: "relative"
+    padding: "100px 80px 50px 80px",
+    position: "relative",
+    maxWidth: "1400px",
+    margin: "0 auto"
   }}>
-    <motion.span
-      initial={{ opacity: 0, x: -10 }}
-      whileInView={{ opacity: 1, x: 0 }}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      style={{
-        paddingRight: "25px",
-        color: textColor,
-        fontFamily: "'Bebas Neue', sans-serif",
-        fontWeight: "400",
-        letterSpacing: "5px",
-        fontSize: "12px",
-        textTransform: "uppercase"
-      }}
+      transition={{ duration: 0.8 }}
     >
-      {title}
-    </motion.span>
-    <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, rgba(200, 16, 46, 0.2), transparent)" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: subtitle ? "12px" : "0" }}>
+        <div style={{ width: "40px", height: "1px", background: textColor }} />
+        <span style={{
+          color: textColor,
+          fontFamily: "'Inter', sans-serif",
+          fontWeight: "600",
+          letterSpacing: "4px",
+          fontSize: "11px",
+          textTransform: "uppercase"
+        }}>
+          {title}
+        </span>
+      </div>
+      {subtitle && (
+        <h2 style={{
+          fontFamily: "'Playfair Display', serif",
+          fontSize: "42px",
+          fontWeight: "600",
+          color: "#1a1a1a",
+          marginTop: "15px",
+          lineHeight: "1.2",
+          letterSpacing: "-0.5px"
+        }}>
+          {subtitle}
+        </h2>
+      )}
+    </motion.div>
   </div>
 );
 
@@ -50,13 +66,15 @@ export default function Unternehmen() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: #080808; color: #FFFFFF; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+        body { background: #0a0a0a; color: #FFFFFF; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         
-        .nav-link { color: #D1D1D1; text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.25s ease; cursor: pointer; }
+        .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; position: relative; }
         .nav-link:hover { color: #FFF; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #C8102E; transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
         
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; align-items: flex-end; margin-right: 15px; }
         .hamburger span { width: 24px; height: 2px; background: #D1D1D1; transition: all 0.3s ease; }
@@ -69,12 +87,12 @@ export default function Unternehmen() {
         .mobile-menu a { color: #D1D1D1; text-decoration: none; padding: 12px 0; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
         .mobile-menu a:hover { color: #FFF; }
         
-        .footer-link { color: #D1D1D1; text-decoration: none; font-size: 13px; transition: color 0.2s; }
-        .footer-link:hover { color: #FFF; }
+        .footer-link { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: all 0.3s ease; font-family: 'Inter', sans-serif; letter-spacing: 0.3px; }
+        .footer-link:hover { color: #FFF; padding-left: 5px; }
 
-        /* Stat-Karten Design wie Projekte-Stil */
-        .stat-card { background: #262626; border: 1px solid #333; padding: 40px; transition: all 0.3s ease; border-radius: 8px; }
-        .stat-card:hover { border-color: #C8102E; transform: translateY(-5px); }
+        /* Stat-Karten Design */
+        .stat-card { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.06); padding: 40px; transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); border-radius: 4px; }
+        .stat-card:hover { border-color: rgba(200,16,46,0.3); transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
 
         /* MOBILE RESPONSIVE */
         @media (max-width: 1024px) {
@@ -128,9 +146,9 @@ export default function Unternehmen() {
         {/* HEADER */}
         <header style={{
           position: "fixed", top: 0, width: "100%", zIndex: 1000,
-          background: "rgba(8,8,8,0.85)", backdropFilter: "blur(15px)",
-          padding: "20px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
-          borderBottom: "1px solid rgba(255,255,255,0.05)"
+          background: "rgba(10,10,10,0.9)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+          padding: "18px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderBottom: "1px solid rgba(255,255,255,0.04)"
         }}>
           <Link href="/" style={{ cursor: "pointer" }}>
             <img src="/logo.png" alt="Logo" style={{ height: "38px" }} />
@@ -207,19 +225,19 @@ export default function Unternehmen() {
             transition={{ duration: 1.2 }} 
             style={{ textAlign: "center", position: "relative", zIndex: 2 }}
           >
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "62px", fontStyle: "italic", fontWeight: "300", letterSpacing: "3px" }}>Tradition trifft <br/> Präzision</h1>
-            <p style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "4px", fontSize: "14px", marginTop: "15px", color: "#C8102E" }}>Über die Pinzgauer Stahl- und Metallbau GmbH</p>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "58px", fontWeight: "600", letterSpacing: "-1px", lineHeight: "1.1" }}>Tradition trifft <br/> Präzision</h1>
+            <p style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "5px", fontSize: "12px", fontWeight: "500", marginTop: "20px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>Über die Pinzgauer Stahl- und Metallbau GmbH</p>
           </motion.div>
         </section>
 
         {/* 1. PHILOSOPHIE - Grau wie LEISTUNGEN (#F5F5F5) */}
-        <div style={{ background: "#F5F5F5", color: "#111" }}>
-          <SectionDivider title="Unsere Philosophie" />
+        <div style={{ background: "#F7F7F5", color: "#111" }}>
+          <SectionDivider title="Philosophie" subtitle="Qualität aus dem Herzen des Pinzgaus" />
           <section style={{ padding: "0 80px 100px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }}>
               <motion.div {...fadeInUp}>
-                <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "42px", fontWeight: "300", lineHeight: "1.2", marginBottom: "30px" }}>
-                  Qualität aus dem Herzen des Pinzgaus – seit Generationen.
+                <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "38px", fontWeight: "600", lineHeight: "1.3", marginBottom: "30px", letterSpacing: "-0.5px" }}>
+                  Seit Generationen – Handwerk auf höchstem Niveau.
                 </h2>
                 <p style={{ fontSize: "16px", lineHeight: "1.8", color: "#444", marginBottom: "20px" }}>
                   Die Pinzgauer Stahl- und Metallbau GmbH steht für erstklassiges Handwerk und innovative Lösungen im Bereich Stahl- und Metallbau. Was als kleine Schlosserei begann, hat sich zu einem modernen Vorzeigebetrieb in Bruck entwickelt.
@@ -250,8 +268,8 @@ export default function Unternehmen() {
         </div>
 
         {/* 2. DATEN & FAKTEN - Grau wie PROJEKTE (#E2E2E2) */}
-        <div style={{ background: "#E2E2E2", color: "#111" }}>
-          <SectionDivider title="Daten & Fakten" />
+        <div style={{ background: "#EDEDEB", color: "#111" }}>
+          <SectionDivider title="Fakten" subtitle="Zahlen die für sich sprechen" />
           <section style={{ padding: "0 80px 120px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "25px" }}>
               {[
@@ -261,8 +279,8 @@ export default function Unternehmen() {
                 { label: "Zertifikate", val: "EN1090" }
               ].map((stat, i) => (
                 <motion.div key={i} {...fadeInUp} transition={{ delay: i * 0.1 }} className="stat-card">
-                  <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "48px", color: "#C8102E", marginBottom: "10px" }}>{stat.val}</p>
-                  <p style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: "#FFF" }}>{stat.label}</p>
+                  <p style={{ fontFamily: "'Playfair Display', serif", fontSize: "48px", fontWeight: "700", color: "#C8102E", marginBottom: "10px" }}>{stat.val}</p>
+                  <p style={{ fontSize: "10px", letterSpacing: "3px", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif", fontWeight: "500" }}>{stat.label}</p>
                 </motion.div>
               ))}
             </div>
@@ -270,12 +288,12 @@ export default function Unternehmen() {
         </div>
 
         {/* 3. ZERTIFIKATE - Grau wie LEISTUNGEN (#F5F5F5) */}
-        <div style={{ background: "#F5F5F5", color: "#111" }}>
-          <SectionDivider title="Zertifizierte Sicherheit" />
+        <div style={{ background: "#F7F7F5", color: "#111" }}>
+          <SectionDivider title="Zertifikate" subtitle="Höchste Standards für Ihre Sicherheit" />
           <section style={{ padding: "0 80px 140px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", alignItems: "center" }}>
               <motion.div {...fadeInUp}>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "32px", marginBottom: "25px" }}>Höchste Standards für Ihre Sicherheit.</h3>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "30px", fontWeight: "600", marginBottom: "25px", letterSpacing: "-0.3px" }}>EN 1090-2 zertifiziert.</h3>
                 <p style={{ fontSize: "16px", lineHeight: "1.8", color: "#444" }}>
                   Im Stahlbau gibt es keine Kompromisse. Wir sind zertifiziert nach <strong>EN 1090-2 (EXC2)</strong>, was uns berechtigt, tragende Bauteile aus Stahl in ganz Europa in Verkehr zu bringen. Unsere Schweißer sind staatlich geprüft und werden regelmäßig nachqualifiziert.
                 </p>
@@ -295,55 +313,54 @@ export default function Unternehmen() {
         </div>
 
         {/* FOOTER */}
-        <footer style={{ background: "#0C0C0C", padding: "100px 80px 60px", color: "#FFF" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 80px" }}>
+        <footer style={{ background: "#0a0a0a", padding: "120px 80px 60px", color: "#FFF" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 100px" }}>
             <motion.div {...fadeInUp}>
-              <img src="/logo.png" alt="Logo" style={{ height: "45px", marginBottom: "30px" }} />
-              <p style={{ color: "#CCCCCC", fontSize: "14px", lineHeight: "2.2" }}>
-                <strong>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
+              <img src="/logo.png" alt="Logo" style={{ height: "40px", marginBottom: "35px", opacity: 0.9 }} />
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "14px", lineHeight: "2.4", fontWeight: "300" }}>
+                <strong style={{ color: "rgba(255,255,255,0.7)", fontWeight: "600" }}>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
                 Gewerbstraße 9, A-5671 Bruck<br />
                 info@psmb.at
               </p>
             </motion.div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Navigation</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Navigation</p>
               <Link href="/unternehmen" className="footer-link">Unternehmen</Link>
               <Link href="/projekte" className="footer-link">Projekte</Link>
               <Link href="/karriere" className="footer-link">Karriere</Link>
               <Link href="/kontakt" className="footer-link">Kontakt</Link>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Rechtliches</p>
-              <a href="#" className="footer-link">Impressum</a>
-              <a href="#" className="footer-link">Datenschutz</a>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Rechtliches</p>
+              <Link href="/impressum" className="footer-link">Impressum</Link>
+              <Link href="/datenschutz" className="footer-link">Datenschutz</Link>
             </div>
             <div style={{ display: "flex", alignItems: "flex-end" }}>
               <motion.div
                 onClick={scrollToTop}
-                whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
+                whileHover={{ scale: 1.08, borderColor: "rgba(255,255,255,0.4)" }}
                 style={{
                   cursor: "pointer",
-                  width: "40px",
-                  height: "40px",
+                  width: "48px",
+                  height: "48px",
                   borderRadius: "50%",
-                  border: "none",
-                  background: "#E2E2E2",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  background: "transparent",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
-                  boxShadow: "0 2px 8px #c8102e11"
+                  transition: "all 0.3s ease"
                 }}
                 title="Nach oben"
               >
-                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
+                <svg width="18" height="18" viewBox="0 0 28 28" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round">
                   <polyline points="8 16 14 10 20 16"></polyline>
                 </svg>
               </motion.div>
             </div>
           </div>
-          <div style={{ borderTop: "1px solid #1A1A1A", paddingTop: "40px", fontSize: "12px", color: "#666", textAlign: "center" }}>
-            (c) 2025 Pinzgauer Stahl- und Metallbau GmbH.
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "40px", fontSize: "12px", color: "rgba(255,255,255,0.25)", textAlign: "center", letterSpacing: "0.5px" }}>
+            © 2025 Pinzgauer Stahl- und Metallbau GmbH. Alle Rechte vorbehalten.
           </div>
         </footer>
       </div>

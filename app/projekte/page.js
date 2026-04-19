@@ -41,13 +41,15 @@ export default function ProjektePage() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { background: #080808; color: #FFFFFF; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+        body { background: #0a0a0a; color: #FFFFFF; font-family: 'Inter', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         
-        .nav-link { color: #D1D1D1; text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.25s ease; cursor: pointer; }
+        .nav-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; transition: color 0.3s ease; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 500; position: relative; }
         .nav-link:hover { color: #FFF; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #C8102E; transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
 
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; align-items: flex-end; margin-right: 15px; }
         .hamburger span { width: 24px; height: 2px; background: #D1D1D1; transition: all 0.3s ease; }
@@ -67,23 +69,24 @@ export default function ProjektePage() {
           background: none;
           border: none;
           color: #666;
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Inter', sans-serif;
           font-size: 13px;
           padding: 12px 0;
           cursor: pointer;
           transition: all 0.3s ease;
           letter-spacing: 1px;
           border-bottom: 1px solid rgba(0,0,0,0.05);
+          font-weight: 400;
         }
-        .filter-btn.active { color: #C8102E; font-weight: bold; border-bottom: 1px solid #C8102E; }
+        .filter-btn.active { color: #C8102E; font-weight: 600; border-bottom: 1px solid #C8102E; }
         .filter-btn:hover { color: #000; }
 
-        /* Projekt-Karten Design von der Main-Seite */
-        .card-project { background: #262626; border: 1px solid #333; transition: all 0.4s ease; height: 100%; border-radius: 8px; overflow: hidden; }
-        .card-project:hover { transform: translateY(-8px); border-color: #C8102E; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        /* Projekt-Karten Design */
+        .card-project { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.06); transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); height: 100%; border-radius: 4px; overflow: hidden; }
+        .card-project:hover { transform: translateY(-8px); border-color: rgba(200,16,46,0.3); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
 
-        .footer-link { color: #D1D1D1; text-decoration: none; font-size: 13px; transition: color 0.2s; }
-        .footer-link:hover { color: #FFF; }
+        .footer-link { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; transition: all 0.3s ease; font-family: 'Inter', sans-serif; letter-spacing: 0.3px; }
+        .footer-link:hover { color: #FFF; padding-left: 5px; }
 
         @media (max-width: 900px) {
           .content-wrapper { flex-direction: column !important; padding: 40px 20px !important; }
@@ -133,9 +136,9 @@ export default function ProjektePage() {
         {/* HEADER (Identisch zur Main) */}
         <header style={{
           position: "fixed", top: 0, width: "100%", zIndex: 1000,
-          background: "rgba(8,8,8,0.85)", backdropFilter: "blur(15px)",
-          padding: "20px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
-          borderBottom: "1px solid rgba(255,255,255,0.05)"
+          background: "rgba(10,10,10,0.9)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
+          padding: "18px 80px", display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderBottom: "1px solid rgba(255,255,255,0.04)"
         }}>
           <Link href="/" style={{ cursor: "pointer" }}>
             <img src="/logo.png" alt="Logo" style={{ height: "38px" }} />
@@ -207,8 +210,8 @@ export default function ProjektePage() {
             }}
           />
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }} style={{ textAlign: "center", zIndex: 2, position: "relative" }}>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "62px", fontStyle: "italic", fontWeight: "300", letterSpacing: "3px", color: "#FFF" }}>Referenzen</h1>
-            <p style={{ fontFamily: "'Bebas Neue', sans-serif", letterSpacing: "4px", fontSize: "14px", marginTop: "15px", color: "#C8102E" }}>Einblick in unsere Meisterwerke</p>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "58px", fontWeight: "600", letterSpacing: "-1px", color: "#FFF", lineHeight: "1.1" }}>Referenzen</h1>
+            <p style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "5px", fontSize: "12px", fontWeight: "500", marginTop: "20px", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>Einblick in unsere Meisterwerke</p>
           </motion.div>
         </section>
 
@@ -217,17 +220,18 @@ export default function ProjektePage() {
           display: "flex", 
           padding: "80px 80px 120px", 
           gap: "60px", 
-          background: "#E2E2E2", 
+          background: "#EDEDEB", 
           color: "#111" 
         }}>
           
           {/* SIDEBAR */}
           <aside className="sidebar" style={{ width: "250px", flexShrink: 0, position: "sticky", top: "120px", height: "fit-content" }}>
             <p style={{ 
-              fontFamily: "'Bebas Neue', sans-serif", 
+              fontFamily: "'Inter', sans-serif", 
               color: "#C8102E", 
-              fontSize: "12px", 
-              letterSpacing: "3px", 
+              fontSize: "11px",
+              fontWeight: "600",
+              letterSpacing: "4px", 
               textTransform: "uppercase", 
               marginBottom: "30px",
               borderBottom: "1px solid rgba(200, 16, 46, 0.2)",
@@ -273,24 +277,25 @@ export default function ProjektePage() {
                     <div style={{ padding: "30px" }}>
                       <span style={{ 
                         color: "#C8102E", 
-                        fontFamily: "'DM Sans', sans-serif", 
+                        fontFamily: "'Inter', sans-serif", 
                         fontSize: "10px", 
-                        letterSpacing: "2px", 
+                        letterSpacing: "3px", 
                         textTransform: "uppercase",
                         fontWeight: "600"
                       }}>
                         {p.cat}
                       </span>
                       <h3 style={{ 
-                        fontFamily: "'Cormorant Garamond', serif", 
+                        fontFamily: "'Playfair Display', serif", 
                         fontSize: "24px", 
                         marginTop: "12px", 
-                        fontWeight: "400",
-                        color: "#FFF" 
+                        fontWeight: "600",
+                        color: "#FFF",
+                        letterSpacing: "-0.3px"
                       }}>
                         {p.title}
                       </h3>
-                      <p style={{ color: "#BBBBBB", fontSize: "14px", marginTop: "12px", lineHeight: "1.7" }}>{p.desc}</p>
+                      <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", marginTop: "12px", lineHeight: "1.7" }}>{p.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -300,55 +305,54 @@ export default function ProjektePage() {
         </div>
 
         {/* FOOTER (Identisch zur Main) */}
-        <footer style={{ background: "#0C0C0C", padding: "100px 80px 60px", color: "#FFF" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 80px" }}>
+        <footer style={{ background: "#0a0a0a", padding: "120px 80px 60px", color: "#FFF" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr auto", gap: "60px", maxWidth: "1400px", margin: "0 auto 100px" }}>
             <motion.div {...fadeInUp}>
-              <img src="/logo.png" alt="Logo" style={{ height: "45px", marginBottom: "30px" }} />
-              <p style={{ color: "#CCCCCC", fontSize: "14px", lineHeight: "2.2" }}>
-                <strong>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
+              <img src="/logo.png" alt="Logo" style={{ height: "40px", marginBottom: "35px", opacity: 0.9 }} />
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "14px", lineHeight: "2.4", fontWeight: "300" }}>
+                <strong style={{ color: "rgba(255,255,255,0.7)", fontWeight: "600" }}>Pinzgauer Stahl- und Metallbau GmbH</strong><br />
                 Gewerbestraße 9, A-5671 Bruck<br />
                 info@psmb.at
               </p>
             </motion.div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Navigation</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Navigation</p>
               <Link href="/unternehmen" className="footer-link">Unternehmen</Link>
               <Link href="/projekte" className="footer-link">Projekte</Link>
               <Link href="/karriere" className="footer-link">Karriere</Link>
               <Link href="/kontakt" className="footer-link">Kontakt</Link>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-              <p style={{ color: "#666", fontSize: "10px", fontWeight: "bold", letterSpacing: "2px", textTransform: "uppercase" }}>Rechtliches</p>
-              <a href="#" className="footer-link">Impressum</a>
-              <a href="#" className="footer-link">Datenschutz</a>
+            <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+              <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "10px", fontWeight: "600", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "5px" }}>Rechtliches</p>
+              <Link href="/impressum" className="footer-link">Impressum</Link>
+              <Link href="/datenschutz" className="footer-link">Datenschutz</Link>
             </div>
             <div style={{ display: "flex", alignItems: "flex-end" }}>
               <motion.div
                 onClick={scrollToTop}
-                whileHover={{ scale: 1.08, boxShadow: "0 4px 16px #c8102e33", backgroundColor: "#E2E2E2" }}
+                whileHover={{ scale: 1.08, borderColor: "rgba(255,255,255,0.4)" }}
                 style={{
                   cursor: "pointer",
-                  width: "40px",
-                  height: "40px",
+                  width: "48px",
+                  height: "48px",
                   borderRadius: "50%",
-                  border: "none",
-                  background: "#E2E2E2",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  background: "transparent",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "all 0.25s cubic-bezier(.4,1.3,.6,1)",
-                  boxShadow: "0 2px 8px #c8102e11"
+                  transition: "all 0.3s ease"
                 }}
                 title="Nach oben"
               >
-                <svg width="20" height="20" viewBox="0 0 28 28" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round">
+                <svg width="18" height="18" viewBox="0 0 28 28" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round">
                   <polyline points="8 16 14 10 20 16"></polyline>
                 </svg>
               </motion.div>
             </div>
           </div>
-          <div style={{ borderTop: "1px solid #1A1A1A", paddingTop: "40px", fontSize: "12px", color: "#666", textAlign: "center" }}>
-            (c) 2025 Pinzgauer Stahl- und Metallbau GmbH.
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "40px", fontSize: "12px", color: "rgba(255,255,255,0.25)", textAlign: "center", letterSpacing: "0.5px" }}>
+            © 2025 Pinzgauer Stahl- und Metallbau GmbH. Alle Rechte vorbehalten.
           </div>
         </footer>
       </div>
